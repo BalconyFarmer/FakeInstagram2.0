@@ -63,8 +63,54 @@ const videos = {
             result.push(postData)
         })
         ctx.body = result;
-    }
+    },
 
+    delMyProfile: async ctx => {
+        let postData = ctx.request.body
+        const result = await initSequelize.videos.delMyProfile(postData.id)
+        if (result) {
+            ctx.body = result
+        } else {
+            ctx.body = null
+        }
+    },
+
+    updateMyProfile: async ctx => {
+        let postData = ctx.request.body
+        const result = await initSequelize.videos.updateMyProfile(postData)
+        if (result) {
+            ctx.body = result
+        } else {
+            ctx.body = null
+        }
+    },
+    getMyProfileByType: async ctx => {
+        let postData = ctx.request.body
+        const result = await initSequelize.videos.getMyProfile(postData.id, postData.type)
+        if (result) {
+            ctx.body = result
+        } else {
+            ctx.body = null
+        }
+    },
+    getVideoList: async ctx => {
+        let postData = ctx.request.body
+        const result = await initSequelize.videos.getVideoList(ctx.request.body.pageIndex)
+        if (result) {
+            ctx.body = result
+        } else {
+            ctx.body = null
+        }
+    },
+    getVideoListLength: async ctx => {
+        let postData = ctx.request.body
+        const result = await initSequelize.videos.getVideoListLength()
+        if (result) {
+            ctx.body = result
+        } else {
+            ctx.body = null
+        }
+    },
 }
 
 module.exports = {

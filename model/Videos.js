@@ -18,26 +18,11 @@ class Videos {
         })
     }
 
-    async getMyProfile(userId) {
+    async getMyProfile(userId, type) {
         const result = await this.videos.findAll({
             where: {
                 userid: userId,
-                type: "img"
-
-            }
-        })
-        if (result[0]) {
-            return result
-        } else {
-            return
-        }
-    }
-
-    async getMyProfileVideo(userId) {
-        const result = await this.videos.findAll({
-            where: {
-                userid: userId,
-                type: "video"
+                type: type
             }
         })
         if (result[0]) {
@@ -48,17 +33,6 @@ class Videos {
     }
 
     async delMyProfile(msID) {
-
-        const result = await this.videos.destroy({
-            where: {
-                videoid: msID
-            }
-        })
-        return result
-    }
-
-    async delMyProfileVideo(msID) {
-
         const result = await this.videos.destroy({
             where: {
                 videoid: msID
@@ -85,29 +59,6 @@ class Videos {
             videoname: postData.videoname,
             videopath: postData.videopath,
             type: postData.type
-        })
-        return result
-        // try {
-        //     const result = await this.videos.create({
-        //         userid: postData.userid,
-        //         videoname: postData.videoname,
-        //         videopath: postData.videopath,
-        //         type: postData.type
-        //     })
-        //     return result
-        //     console.log('okokok');
-        // } catch (error) {
-        //     console.error('err:', error);
-        // }
-
-    }
-
-    async saveBigImg(postData) {
-        const result = await this.videos.create({
-            userid: postData.userid,
-            videoname: postData.videoname,
-            videopath: postData.videopath,
-            type: "img"
         })
         return result
     }

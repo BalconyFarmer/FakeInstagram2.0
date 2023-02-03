@@ -33,6 +33,31 @@ const routeList = [
         before: videos.saveVideoBefore,
         controller: videos.saveVideo
     },
+    {
+        method: 'post',
+        path: '/delMyProfile',
+        controller: videos.delMyProfile
+    },
+    {
+        method: 'post',
+        path: '/updateMyProfile',
+        controller: videos.updateMyProfile
+    },
+    {
+        method: 'post',
+        path: '/getMyProfileByType',
+        controller: videos.getMyProfileByType
+    },
+    {
+        method: 'post',
+        path: '/getVideoList',
+        controller: videos.getVideoList
+    },
+    {
+        method: 'post',
+        path: '/getVideoListLength',
+        controller: videos.getVideoListLength
+    },
 ];
 
 routeList.forEach(item => {
