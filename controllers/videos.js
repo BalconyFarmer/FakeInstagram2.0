@@ -60,7 +60,6 @@ const videos = {
                 type: ctx.request.body.type
             }
             initSequelize.videos.saveVideo(postData)
-            console.log(postData, "++++++++")
             result.push(postData)
         })
         ctx.body = result;

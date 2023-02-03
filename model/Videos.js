@@ -81,16 +81,25 @@ class Videos {
 
     async saveVideo(postData) {
         const result = await this.videos.create({
-            // userid: postData.userid,
-            // videoname: postData.videoname,
-            // videopath: postData.videopath,
-            // type: postData.type
-            userid: "11",
-            videoname: "11",
-            videopath: "11",
-            type: "11"
+            userid: postData.userid,
+            videoname: postData.videoname,
+            videopath: postData.videopath,
+            type: postData.type
         })
         return result
+        // try {
+        //     const result = await this.videos.create({
+        //         userid: postData.userid,
+        //         videoname: postData.videoname,
+        //         videopath: postData.videopath,
+        //         type: postData.type
+        //     })
+        //     return result
+        //     console.log('okokok');
+        // } catch (error) {
+        //     console.error('err:', error);
+        // }
+
     }
 
     async saveBigImg(postData) {
