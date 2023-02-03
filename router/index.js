@@ -1,6 +1,7 @@
 const Router = require('koa-router')
 const router = new Router()
 const {users} = require("../controllers/users")
+const {videos} = require("../controllers/videos")
 
 const routeList = [
 
@@ -24,6 +25,13 @@ const routeList = [
         path: '/uploadHead',
         before: users.uploadHeadBefore,
         controller: users.uploadHead
+    },
+
+    {
+        method: 'post',
+        path: '/saveVideo',
+        before: videos.saveVideoBefore,
+        controller: videos.saveVideo
     },
 ];
 

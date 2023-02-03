@@ -81,10 +81,14 @@ class Videos {
 
     async saveVideo(postData) {
         const result = await this.videos.create({
-            userid: postData.userid,
-            videoname: postData.videoname,
-            videopath: postData.videopath,
-            type: postData.type
+            // userid: postData.userid,
+            // videoname: postData.videoname,
+            // videopath: postData.videopath,
+            // type: postData.type
+            userid: "11",
+            videoname: "11",
+            videopath: "11",
+            type: "11"
         })
         return result
     }
