@@ -2,6 +2,7 @@ const {Sequelize, Model, DataTypes} = require('sequelize')
 const {config} = require('../common/config')
 const {Users} = require("./Users")
 const {Videos} = require("./Videos")
+const {VideoContents} = require("./VideoContents")
 
 /**
  * 数据库操作类
@@ -31,6 +32,7 @@ class initSquelize {
 
         this.users = new Users(sequelize)
         this.videos = new Videos(sequelize)
+        this.videoContents = new VideoContents(sequelize)
     }
 
 
