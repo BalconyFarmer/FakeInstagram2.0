@@ -47,7 +47,6 @@ class Attention {
             {
                 where: {
                     'from': params.from,
-                    'to': params.to
                 }
             }
         )
