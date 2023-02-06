@@ -3,6 +3,7 @@ const router = new Router()
 const {users} = require("../controllers/users")
 const {videos} = require("../controllers/videos")
 const {videoContents} = require("../controllers/videoContents")
+const {attention} = require("../controllers/attention")
 
 const routeList = [
 
@@ -66,8 +67,18 @@ const routeList = [
     },
     {
         method: 'post',
-        path: '/videoContentQuery',
-        controller: videoContents.videoContentQuery
+        path: '/addAttention',
+        controller: attention.addAttention
+    },
+    {
+        method: 'post',
+        path: '/delAttention',
+        controller: attention.delAttention
+    },
+    {
+        method: 'post',
+        path: '/findAttention',
+        controller: attention.findAttention
     },
 ];
 
