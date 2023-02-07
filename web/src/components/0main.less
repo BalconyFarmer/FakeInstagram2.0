@@ -1,0 +1,32 @@
+@outer: #323233;
+@center: #252526;
+@innner: #1E1E1E;
+
+@fontColor: #202123;
+
+.finger { cursor: pointer; }
+
+::-webkit-scrollbar
+{
+    width:5px;
+    height:16px;
+    background-color: gray;
+}
+
+/*定义滚动条轨道
+ 内阴影+圆角*/
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius:10px;
+    background-color:#F5F5F5;
+}
+
+/*定义滑块
+ 内阴影+圆角*/
+::-webkit-scrollbar-thumb
+{
+    border-radius:10px;
+    -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.3);
+    background-color:#555;
+}
