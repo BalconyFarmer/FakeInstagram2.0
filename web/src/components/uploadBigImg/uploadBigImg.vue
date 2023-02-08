@@ -101,34 +101,16 @@ export default {
 
             this.uploading = true;
 
-            if (this.type == "pic") {
-                saveBigImg(formData).then(response => {
-                    if (response.data == "无权限") {
-                        this.$message.success("登陆过期,重新登陆!");
-                        this.uploading = false;
-                        this.fileList = []
-                        this.resData = response.data
-                    } else {
-                        this.$message.success(response.statusText);
-                        this.uploading = false;
-                        this.fileList = []
-                        this.resData = response.data
-                        this.$emit("callback", "");
-                        this.$store.commit('setSendShow', 1)
-                    }
-                })
-            } else if (this.type == "video") {
-                formData.append('type', "video");
+            formData.append('type', this.type);
 
-                saveVideo(formData).then(response => {
-                    this.$message.success(response.statusText);
-                    this.uploading = false;
-                    this.fileList = []
-                    this.resData = response.data
-                    this.$emit("callback", "");
-                    this.$store.commit('setSendShow', 1)
-                })
-            }
+            saveVideo(formData).then(response => {
+                this.$message.success(response.statusText);
+                this.uploading = false;
+                this.fileList = []
+                this.resData = response.data
+                this.$emit("callback", "");
+                this.$store.commit('setSendShow', 1)
+            })
 
 
         },

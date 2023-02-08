@@ -221,7 +221,7 @@ export default {
             }
 
             this.gridData = []
-            const param = {id: userInf.id, type: "video"}
+            const param = {id: userInf.id, type: buttonIndex}
             getMyProfileByType(param).then(res => {
                 if (res.data.length) {
                     this.gridData = res.data
