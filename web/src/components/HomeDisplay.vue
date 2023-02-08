@@ -1,22 +1,25 @@
 <template>
     <div v-loading="loading" class="hAll">
-        <div class="up" v-if="getsendShow">
-            <upload-big-img @callback="afterUpload"></upload-big-img>
-        </div>
 
         <div class="videoAll" v-if="videoList.length">
             <div v-for="item in videoList">
 
                 <div class="videoItem" v-if="item.videopath">
                     <div class="top">
-                        <div class="headIcon finger" @click="gotoPer(item.userInf)">
-                            <img style="width: 100%; height: 100%;border-radius: 50%;" :src="serverAdress + item.userInf.headIcon">
+                        <div class="headIcon finger" @click="gotoPer(item.userInf)" v-if="item.userInf">
+                            <img style="width: 100%; height: 100%;border-radius: 50%;"
+                                 :src="serverAdress + item.userInf.headIcon">
                         </div>
-                        <div @click="gotoPer(item.userInf)" class="userName finger" v-if="item.userInf">{{ item.userInf.name }}</div>
+                        <div @click="gotoPer(item.userInf)" class="userName finger" v-if="item.userInf">
+                            {{ item.userInf.name }}
+                        </div>
                     </div>
 
-                    <PlayVideo v-if="item.type == 'video'" class="centerPlayVideo" :mySrc="serverAdress + item.videopath"></PlayVideo>
-                    <!--                    <img v-if="item.type == 'img'" class="centerPlayVideo" :src="serverAdress + item.videopath" id="wordPic">-->
+                    <div class="centerPlayVideo">
+                        <PlayVideo v-if="item.type == 'video'"
+                                   :mySrc="serverAdress + item.videopath"></PlayVideo>
+                    </div>
+
 
                     <el-image
                         fit="cover"
@@ -29,7 +32,9 @@
 
                     <div class="bottom">
                         <div class="picName">
-                            <span style="font-weight: bold;margin-left: 10px">{{ item.userInf.name }} : </span>
+                            <span style="font-weight: bold;margin-left: 10px" v-if="item.userInf">{{
+                                    item.userInf.name
+                                }} : </span>
                             <div style="overflow: auto" v-html="item.videoname"></div>
                         </div>
                         <div v-if="item.contentList.length" v-for="item1 in item.contentList">
@@ -50,7 +55,8 @@
                         </div>
 
                         <div class="btn">
-                            <el-button size="mini" type="primary" icon="el-icon-check" @click="addContent(item)"></el-button>
+                            <el-button size="mini" type="primary" icon="el-icon-check"
+                                       @click="addContent(item)"></el-button>
                         </div>
                     </div>
                 </div>
@@ -63,6 +69,15 @@
                 width="90%"
             >
                 <PersonalPage v-if="dialogVisible"></PersonalPage>
+            </el-dialog>
+
+            <el-dialog
+                title="上传"
+                :visible.sync="getsendShow"
+                width="90%"
+            >
+                <upload-big-img @callback="afterUpload"></upload-big-img>
+
             </el-dialog>
 
         </div>
@@ -142,7 +157,6 @@ export default {
             const list = _res.data
             // this.allProLength = _res.data.allCnt
             this.allProLength = 11
-            // debugger
 
             if (list.length) {
                 list.forEach(item => {
@@ -221,16 +235,6 @@ export default {
 <style lang="less">
 @value: 0.01;
 
-.hAll {
-    .up {
-        width: 100%;
-        height: 20%;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-}
 
 .videoAll {
     display: flex;
@@ -252,7 +256,7 @@ export default {
             flex-direction: row;
             justify-content: flex-start;
             align-items: center;
-
+            z-index: 9999;
 
             .headIcon {
                 width: 40px;

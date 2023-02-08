@@ -1,4 +1,3 @@
-
 <template>
     <div class="videoAll">
         <video
@@ -6,9 +5,9 @@
             class="video-js"
             controls="true"
             preload="false"
-            style="width:100%;height:300px;object-fit: fill"
-            width="100% !important"
-            height="100% !important"
+            style="width:600px;height:300px;"
+            width="600"
+            height="300"
             data-setup='{"fluid": true}'>
             <source :src="mySrc" type="video/mp4"></source>
             <source :src="mySrc" type="video/webm"></source>
@@ -38,7 +37,10 @@ export default {
 
 <style scoped>
 .videoAll {
-    width: 100%;
-    height: 100%;
+    width: 600px;
+    height: 300px;
+}
+.my-player-dimensions.vjs-fluid {
+    padding-top: 26%;
 }
 </style>
