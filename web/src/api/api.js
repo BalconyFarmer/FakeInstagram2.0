@@ -38,10 +38,10 @@ export function test(formData) {
  * @param formData
  * @returns {*}
  */
-export function getMyProfile(formData) {
+export function getMyProfileByType(formData) {
     return axios({
         method: "post",
-        url: serverAdress + '/getMyProfile',
+        url: serverAdress + '/getMyProfileByType',
         data: formData,
         withCredentials: true
     })

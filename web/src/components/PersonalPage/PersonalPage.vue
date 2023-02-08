@@ -3,7 +3,8 @@
         <div class="inner">
             <div class="top">
                 <div class="left1 finger" v-if="userInf.headIcon">
-                    <img @click="anotherUser.show ? ChangeHeadShow = false : ChangeHeadShow = true" :src="serverAdress + userInf.headIcon">
+                    <img @click="anotherUser.show ? ChangeHeadShow = false : ChangeHeadShow = true"
+                         :src="serverAdress + userInf.headIcon">
                 </div>
 
                 <div class="right1">
@@ -29,15 +30,19 @@
 
             <div class="bottom">
                 <div class="bottomHeader" v-loading="loading">
-                    <div class="finger" :class="{ active : buttonIndex == 1 }" @click="buttonIndex=1">pictures</div>
-                    <div class="finger" :class="{ active : buttonIndex == 2 }" @click="buttonIndex=2">videos</div>
+                    <div class="finger" :class="{ active : buttonIndex == 'pic' }" @click="buttonIndex='pic'">pictures
+                    </div>
+                    <div class="finger" :class="{ active : buttonIndex == 'video' }" @click="buttonIndex='video'">
+                        videos
+                    </div>
                 </div>
 
-                <div v-if="buttonIndex == 1">
+                <div v-if="buttonIndex == 'pic'">
                     <el-table :data="gridData">
                         <el-table-column label="图片预览">
                             <template width="90" slot-scope="scope">
-                                <img style="width:80px;height:80px;border:none;" :src="serverAdress + scope.row.videopath">
+                                <img style="width:80px;height:80px;border:none;"
+                                     :src="serverAdress + scope.row.videopath">
                             </template>
                         </el-table-column>
                         <el-table-column property="videoname" label="名称" width="150"></el-table-column>
@@ -61,7 +66,7 @@
                     </el-dialog>
                 </div>
 
-                <div v-if="buttonIndex == 2">
+                <div v-if="buttonIndex == 'video'">
                     <el-table :data="videoList">
                         <el-table-column label="视频预览">
                             <template width="90" slot-scope="scope">
@@ -122,7 +127,18 @@
 
 <script>
 import {mapGetters, mapState, mapMutations} from "vuex";
-import {findMyFlowerAttention, findMyAttention, findAttention, delAttention, addAttention, getMyProfile, delMyProfile, updateMyProfile, getMyProfileVideo, delMyProfileVideo} from '@/api/api'
+import {
+    findMyFlowerAttention,
+    findMyAttention,
+    findAttention,
+    delAttention,
+    addAttention,
+    getMyProfileByType,
+    delMyProfile,
+    updateMyProfile,
+    getMyProfileVideo,
+    delMyProfileVideo
+} from '@/api/api'
 import {serverAdress} from '@/config';
 import PlayVideo from "@/commonComponents/PlayVideo";
 import ChangeHead from "./ChangeHead";
@@ -143,7 +159,7 @@ export default {
             ChangeHeadShow: false,
             serverAdress: serverAdress,
             userInf: null,
-            buttonIndex: 1,
+            buttonIndex: 'video',
             gridData: [{
                 msg: "1",
                 msgid: 13,
@@ -161,11 +177,7 @@ export default {
     watch: {
         buttonIndex: {
             handler(newValue) {
-                if (this.buttonIndex == 1) {
-                    this.getPicList()
-                } else if (this.buttonIndex == 2) {
-                    this.getVideoList()
-                }
+                this.getVideoList()
             },
             deep: true,
             immediate: true
@@ -209,8 +221,8 @@ export default {
             }
 
             this.gridData = []
-            const param = {id: userInf.id}
-            getMyProfile(param).then(res => {
+            const param = {id: userInf.id, type: "video"}
+            getMyProfileByType(param).then(res => {
                 if (res.data.length) {
                     this.gridData = res.data
                     this.loading = false
@@ -229,9 +241,9 @@ export default {
                 userInf = this.getUserInf
             }
 
-            const param = {id: userInf.id}
+            const param = {id: userInf.id, type: this.buttonIndex}
             this.videoList = []
-            getMyProfileVideo(param).then(res => {
+            getMyProfileByType(param).then(res => {
                 if (res.data.length) {
                     this.videoList = res.data
                     this.loading = false
