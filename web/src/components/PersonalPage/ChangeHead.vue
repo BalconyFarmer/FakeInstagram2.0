@@ -63,7 +63,7 @@ export default {
             const {fileList} = this;
             const formData = new FormData();
             fileList.forEach(file => {
-                formData.append('files[]', file);
+                formData.append(this.getUserInf.id, file);
             });
             formData.append('videoIntroduce', '11');
             this.uploading = true;
@@ -85,6 +85,7 @@ export default {
         ...mapGetters(["getUserInf"])
     },
     mounted() {
+
     },
     beforeDestroy: function () {
         console.log('清除3D内存!')
