@@ -78,7 +78,7 @@
 
 <script>
 import {serverAdress} from '../config'
-import {getVideoList, getUserById, videoContentAdd, videoContentQuery, test} from '@/api/api'
+import {getVideoList, getUserById, videoContentAdd, videoContentQuery} from '@/api/api'
 import PersonalPage from "./PersonalPage/PersonalPage";
 import PlayVideo from "../commonComponents/PlayVideo";
 import {mapGetters, mapState, mapMutations} from "vuex";
@@ -139,12 +139,10 @@ export default {
             }
             const _res = await getVideoList(formData)
 
-            // const see = await test()
-            // console.log(see)
+            const list = _res.data
+            // this.allProLength = _res.data.allCnt
+            this.allProLength = 11
             // debugger
-
-            const list = _res.data.list
-            this.allProLength = _res.data.allCnt
 
             if (list.length) {
                 list.forEach(item => {
