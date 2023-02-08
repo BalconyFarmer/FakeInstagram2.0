@@ -67,6 +67,12 @@ const routeList = [
     },
     {
         method: 'post',
+        path: '/videoContentQuery',
+        controller: videoContents.videoContentQuery
+    },
+
+    {
+        method: 'post',
         path: '/addAttention',
         controller: attention.addAttention
     },

@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {saveBigImg, saveVideo} from '@/api/api'
+import {saveVideo} from '@/api/api'
 import {serverAdress} from '@/config'
 import E from "wangeditor"
 
@@ -91,8 +91,9 @@ export default {
         // 上传服务器
         handleUpload() {
             const formData = new FormData();
+            let userID = "9"
             this.fileList.forEach(file => {
-                formData.append('files[]', file);
+                formData.append(userID, file);
             });
 
             const jsonData = this.editorApp.txt.html()
@@ -117,6 +118,8 @@ export default {
                     }
                 })
             } else if (this.type == "video") {
+                formData.append('type', "video");
+
                 saveVideo(formData).then(response => {
                     this.$message.success(response.statusText);
                     this.uploading = false;

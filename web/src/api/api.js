@@ -143,15 +143,6 @@ export function saveVideo(formData) {
     })
 }
 
-export function saveBigImg(formData) {
-    return axios({
-        method: "post",
-        url: serverAdress + '/saveBigImg',
-        data: formData,
-        withCredentials: true
-    })
-}
-
 export function uploadHead(formData) {
     return axios({
         method: "post",
