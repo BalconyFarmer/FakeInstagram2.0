@@ -45,7 +45,7 @@ const store = new Vuex.Store({
     },
     mutations: {
         setSendShow(state, flag) {
-            state.sendShow = !state.sendShow
+            state.sendShow = flag
         },
         increment(state) {
             state.count++

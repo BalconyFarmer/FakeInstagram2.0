@@ -71,7 +71,7 @@ export default {
     },
     methods: {
         send() {
-            this.$store.commit('setSendShow', 1)
+            this.$store.commit('setSendShow', true)
         },
         routeTo(route) {
             this.$router.push({path: '/' + route}).catch(error => error)

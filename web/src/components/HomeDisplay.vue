@@ -62,22 +62,6 @@
 
             </div>
 
-            <el-dialog
-                title="个人主页"
-                :visible.sync="dialogVisible"
-                width="90%"
-            >
-                <PersonalPage v-if="dialogVisible"></PersonalPage>
-            </el-dialog>
-
-            <el-dialog
-                title="上传"
-                :visible.sync="getsendShow"
-                width="90%"
-            >
-                <upload-big-img @callback="afterUpload"></upload-big-img>
-
-            </el-dialog>
 
         </div>
         <div v-else>快来分享有shi以来第一条消息吧!</div>
@@ -87,6 +71,22 @@
             </button>
         </div>
 
+        <el-dialog
+            title="个人主页"
+            :visible.sync="personalDialog"
+            width="90%"
+        >
+            <PersonalPage v-if="personalDialog"></PersonalPage>
+        </el-dialog>
+
+        <el-dialog
+            title="上传"
+            :visible.sync="uploadDialog"
+            :before-close="handleClose"
+            width="90%"
+        >
+            <upload-big-img @callback="afterUpload"></upload-big-img>
+        </el-dialog>
     </div>
 </template>
 
@@ -106,7 +106,7 @@ export default {
             allMsg: null,
             videoList: [],
             serverAdress: serverAdress,
-            dialogVisible: false,
+            personalDialog: false,
 
             contentPatams: {
                 textarea: null,
@@ -116,6 +116,7 @@ export default {
             loading: false,
             i: 0,
             allProLength: 0,
+            uploadDialog: false
         }
     },
     computed: {
@@ -215,13 +216,35 @@ export default {
                 this.$store.commit('changeAnotherUser', userInf)
             }
 
-            this.dialogVisible = true
+            this.personalDialog = true
         },
         async get() {
             await this.loadAllVideo(this.i)
             this.i = this.i + 3
+        },
+        handleClose() {
+            this.$store.commit('setSendShow', false)
         }
 
+    },
+
+    watch: {
+        getsendShow: {
+            handler(newValue) {
+                const see = this.getsendShow
+                this.uploadDialog = this.getsendShow
+            },
+            deep: true,
+            immediate: true
+
+        },
+        uploadDialog: {
+            handler(newValue) {
+            },
+            deep: true,
+            immediate: true
+
+        },
     },
     created() {
     },

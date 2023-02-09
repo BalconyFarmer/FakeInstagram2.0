@@ -109,7 +109,7 @@ export default {
                 this.fileList = []
                 this.resData = response.data
                 this.$emit("callback", "");
-                this.$store.commit('setSendShow', 1)
+                this.$store.commit('setSendShow', false)
             })
 
 
