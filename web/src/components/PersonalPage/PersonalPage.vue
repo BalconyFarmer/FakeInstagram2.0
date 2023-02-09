@@ -38,7 +38,7 @@
                 </div>
 
                 <div v-if="buttonIndex == 'pic'">
-                    <el-table :data="gridData">
+                    <el-table :data="videoList">
                         <el-table-column label="图片预览">
                             <template width="90" slot-scope="scope">
                                 <img style="width:80px;height:80px;border:none;"
@@ -160,13 +160,6 @@ export default {
             serverAdress: serverAdress,
             userInf: null,
             buttonIndex: 'video',
-            gridData: [{
-                msg: "1",
-                msgid: 13,
-                picData: "data:image/png;base64,/9j/4SCJaHR0cDovL25zLmFkb2J..",
-                picPath: "./static/2userStatic/78/pictures/头像.jpg.png",
-                userid: 78
-            }],
             videoList: [],
             dialogVisible: false,
             input: null,
@@ -211,26 +204,7 @@ export default {
                 this.getVideoList()
             })
         },
-        getPicList() {
-            this.loading = true
-            let userInf = null
-            if (this.anotherUser.show) {
-                userInf = this.anotherUser.inf
-            } else {
-                userInf = this.getUserInf
-            }
 
-            this.gridData = []
-            const param = {id: userInf.id, type: buttonIndex}
-            getMyProfileByType(param).then(res => {
-                if (res.data.length) {
-                    this.gridData = res.data
-                    this.loading = false
-                } else {
-                    this.loading = false
-                }
-            })
-        },
         getVideoList() {
             this.loading = true
 

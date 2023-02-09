@@ -15,15 +15,14 @@
                         </div>
                     </div>
 
-                    <div class="centerPlayVideo">
+                    <div v-if="item.type == 'video'" class="centerPlayVideo">
                         <PlayVideo v-if="item.type == 'video'"
                                    :mySrc="serverAdress + item.videopath"></PlayVideo>
                     </div>
 
-
                     <el-image
                         fit="cover"
-                        class="centerPlayVideo"
+                        class=""
                         v-if="item.type == 'pic'"
                         style="width: 100%; height: 60%"
                         :src="serverAdress + item.videopath"
