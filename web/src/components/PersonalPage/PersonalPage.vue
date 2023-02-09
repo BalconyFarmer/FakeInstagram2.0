@@ -136,8 +136,6 @@ import {
     getMyProfileByType,
     delMyProfile,
     updateMyProfile,
-    getMyProfileVideo,
-    delMyProfileVideo
 } from '@/api/api'
 import {serverAdress} from '@/config';
 import PlayVideo from "@/commonComponents/PlayVideo";
@@ -193,13 +191,14 @@ export default {
             }
         },
         deleteVideo(data) {
+
             const videoid = data.videoid
             const videopath = data.videopath
             const params = {
-                videoid: videoid,
+                id: videoid,
                 videopath: videopath
             }
-            delMyProfileVideo(params).then(res => {
+            delMyProfile(params).then(res => {
                 this.$message.success(res.data);
                 this.getVideoList()
             })
@@ -235,7 +234,7 @@ export default {
             const param = {id: data.videoid, path: data.videopath}
             delMyProfile(param).then(res => {
                 this.$message.success(res.data);
-                this.getPicList()
+                this.getVideoList()
             })
         },
         handleUpdataGo() {

@@ -75,19 +75,6 @@ export function delMyProfile(formData) {
     })
 }
 
-/**
- * 删除我的视频 文字
- * @param formData
- * @returns {*}
- */
-export function delMyProfileVideo(params) {
-    return axios({
-        method: "post",
-        url: serverAdress + '/delMyProfileVideo',
-        data: params,
-        withCredentials: true
-    })
-}
 
 /**
  * 更新我的作品
